@@ -13,6 +13,10 @@ class CatalogsTableSeeder extends Seeder
      */
     public function run()
     {
+        $cont = \Storage::disk('data')->get('catalog2000.json');
+        $features = json_decode($cont, 1);
+        \DB::table('catalogs')->insertOrIgnore(array_map([$this, 'update_rows'], $features));
+
         $cont = \Storage::disk('data')->get('catalogEND.json');
         $features = json_decode($cont, 1);
         \DB::table('catalogs')->insertOrIgnore(array_map([$this, 'update_rows'], $features));

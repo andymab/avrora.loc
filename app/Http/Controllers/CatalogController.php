@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\catalogs;
+use DB;
 use Illuminate\Http\Request;
 
 class CatalogController extends Controller
@@ -12,9 +13,22 @@ class CatalogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id="",Request $request)
     {
-        $catalog = catalogs::all();
+        if ($id) {
+            $catalog = DB::table('catalogs')
+                ->where('mgroup_id', '=', $id)
+                ->leftJoin('mgroups', 'catalogs.mgroup_id', '=', 'mgroups.id')
+                ->leftJoin('features', 'catalogs.metal', '=', 'features.id')
+                ->select('catalogs.*', 'mgroups.name as mgroup_name','features.name as features_name')
+                ->get();
+        } else {
+            $catalog = DB::table('catalogs')
+                ->leftJoin('mgroups', 'catalogs.mgroup_id', '=', 'mgroups.id')
+                ->leftJoin('features', 'catalogs.metal', '=', 'features.id')
+                ->select('catalogs.*', 'mgroups.name as mgroup_name','features.name as features_name')
+                ->get();
+        }
         return view('catalog.index', compact('catalog'));
     }
 

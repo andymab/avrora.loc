@@ -19,4 +19,4 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 //Route::get('/', action: '{CatalogController@index}');
-Route::get('/', [CatalogController::class, 'index']);
+Route::get('/catalog/{id?}', [CatalogController::class, 'index']);
