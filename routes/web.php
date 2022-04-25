@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\MgroupController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -18,5 +19,5 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-//Route::get('/', action: '{CatalogController@index}');
+Route::get('/', [MgroupController::class, 'index']);
 Route::get('/catalog/{id?}', [CatalogController::class, 'index']);
