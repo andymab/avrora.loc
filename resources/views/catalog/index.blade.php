@@ -22,7 +22,7 @@
     <ul class="Product_elements pt-4 pb-5">
       @foreach($catalogs as $catalog)
       <li class="Product_element"><a class="m-auto Product-block transition" href="/catalog/show/{{$catalog->id}}">
-          <div class="box-image" style="background-image:url(/media/products/m/{{$catalog->img}}) ;"></div>
+          <div class="box-image" style="background-image:url(/media/{{$catalog->img}}) ;"></div>
         </a>
         <div class="spec" style="text-align: left;padding-left: 1rem;"><small style="margin-right: 1rem;">арт:</small><span>{{$catalog->articul}}</span></div>
       </li>
