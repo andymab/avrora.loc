@@ -13,23 +13,26 @@ class CatalogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id="",Request $request)
+    public function index($id="",Request $request )//metal=1 золото
     {
+        $metal = $request->input('metal') ?? 1 ;
+
         if ($id) {
-            $catalog = DB::table('catalogs')
+            $catalogs = DB::table('catalogs')
                 ->where('mgroup_id', '=', $id)
+                ->where('metal','=', $metal)
                 ->leftJoin('mgroups', 'catalogs.mgroup_id', '=', 'mgroups.id')
                 ->leftJoin('features', 'catalogs.metal', '=', 'features.id')
                 ->select('catalogs.*', 'mgroups.name as mgroup_name','features.name as features_name')
                 ->get();
         } else {
-            $catalog = DB::table('catalogs')
+            $catalogs = DB::table('catalogs')
                 ->leftJoin('mgroups', 'catalogs.mgroup_id', '=', 'mgroups.id')
                 ->leftJoin('features', 'catalogs.metal', '=', 'features.id')
                 ->select('catalogs.*', 'mgroups.name as mgroup_name','features.name as features_name')
                 ->get();
         }
-        return view('catalog.index', compact('catalog'));
+        return view('catalog.index', compact('catalogs'));
     }
 
     /**
