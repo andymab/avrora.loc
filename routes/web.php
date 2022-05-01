@@ -21,3 +21,6 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::get('/', [MgroupController::class, 'index']);
 Route::get('/catalog/{id?}', [CatalogController::class, 'index']);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
