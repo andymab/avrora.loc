@@ -26,3 +26,9 @@ Route::resource('/catalog','\App\Http\Controllers\CatalogController');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+//так можно группировать то что может админ
+// Route::group(['middleware' => ['admin']], function () {
+//     Route::get('admin-view', 'HomeController@adminView')->name('admin.view');
+// });

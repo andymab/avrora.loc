@@ -12,6 +12,14 @@ use stdClass;
 
 class CatalogController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index,show');
+        $this->middleware('admin')->only('destroy');
+    //  $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -174,7 +182,7 @@ class CatalogController extends Controller
             $el_db->img = $store_path . '/' . $store_name;
         }
         $el_db->update();
-        return redirect(route('catalog.show', $el_db->id))->with('success', 'Изделие успешно создано');
+        return redirect(route('catalog.show', $el_db->id))->with('success', 'Изделие успешно обновленно');
     }
 
     /**
@@ -187,6 +195,6 @@ class CatalogController extends Controller
     {
         $el_db =  catalogs::where('id', $id)->first();
         $el_db->delete();
-        return redirect(route('catalog.index', $el_db->mgroup_id))->with('success', 'Изделие успешно удалено');
+        return redirect(route('catalog.index', ['mgroup_id' => $el_db->mgroup_id]))->with('success', 'Изделие успешно удалено');
     }
 }

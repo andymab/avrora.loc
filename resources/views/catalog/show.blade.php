@@ -27,15 +27,15 @@ use Illuminate\Support\Carbon;
                         <p class="text-start mb-0"><span class="text-muted">обновил:</span> {{ Carbon::parse($element_catalog->updated_at)->diffForHumans() }}</p>
                         <p class="text-start "><span class="text-muted">Автор:</span> </p>
                         <a href="{{ route('catalog.index',['mgroup_id'=>$element_catalog->mgroup_id])}}" class="btn btn-outline-success btn-sm">В каталог</a>
+                        @auth
                         <a href="{{ route('catalog.edit',[$element_catalog->id])}}" class="btn btn-outline-primary btn-sm">Редактировать</a>
-                        
-                        <form action="{{ route('catalog.destroy',[$element_catalog->id])}}" method="POST" enctype="multipart/form-data" style="display:inline-block" onclick="if( confirm('точно хотите удалить карточку')){return true} else {return false}">
+                        <form action="{{ route('catalog.destroy',$element_catalog->id)}}" method="POST" enctype="multipart/form-data" style="display:inline-block" onclick="if( confirm('точно хотите удалить карточку')){return true} else {return false}">
                             @csrf
                             @method('DELETE')
 <input type="submit" class="btn btn-outline-danger btn-sm" value="Удалить">
                         </form>
-                        
-                    </div>
+                        @endauth
+                       </div>
                 </div>
             </div>
         </div>

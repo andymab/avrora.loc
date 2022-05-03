@@ -12,10 +12,12 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{{ url('/') }}">Каталог</a>
         </li>
+        @auth
         <li class="nav-item">
         <a class="nav-link" href="{{ route('catalog.create') }}">{{ __('lang.catalog_create') }}</a>
         </li>
-        <li class="nav-item dropdown">
+        @endauth
+        {{-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Действия
           </a>
@@ -25,7 +27,7 @@
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Действия 3</a></li>
           </ul>
-        </li>
+        </li> --}}
         <!-- <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
         </li> -->
