@@ -13,6 +13,12 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $user = [
+            'name' => 'Минаев Андрей',
+            'email' => '650517@355000.ru',
+            'password' => bcrypt('txt472')
+        ];
+        \DB::table('users')->insert($user);
+
     }
 }

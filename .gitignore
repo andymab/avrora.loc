@@ -5,6 +5,7 @@
 /public/assets/fonts
 /public/media
 /storage/*.key
+/storage/media
 /vendor
 .env
 .env.backup

@@ -1,30 +1,43 @@
-@extends('layouts.layout')
+@extends('layouts.layout',[
+'title'=>isset($mgroup) ? $mgroup->name.' | Каталог' : "Результат поиска"
+])
 
 @section('content')
 <section class="text-center bg-light">
   <div class="container">
-
-    <!-- Start: Navbar Right Links -->
-    <nav class="navbar navbar-light navbar-expand-md py-3">
-      <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center me-2 bs-icon" style="background: var(--bs-orange);"><i class="fas fa-home"></i></span><span class="navbar-brand-title">{{$catalogs[0]->mgroup_name}}</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navcol-2">
-
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link {{ filter_input(INPUT_GET,'metal') == 1 ? 'active' : '' }}" href="?metal=1">Золото</a></li>
-            <li class="nav-item"><a class="nav-link {{ filter_input(INPUT_GET,'metal') == 2 ? 'active' : '' }}" href="?metal=2">Серебро</a></li>
+    @if($search)
+    <h2>Результаты запроса</h2>
+    @if(sizeof($catalogs))
+    <p>По Вашему запросу <strong>{{ $search }}</strong> найдено: {{sizeof($catalogs)}} изд.</p>
+    @else
+    <p>По Вашему запросу <strong>{{ $search }}</strong> ничего не найдено</p>
+    <a href="/" class="btn btn-outline-primary">Отобразить все посты</a>
+    @endif
+    @else
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+          <svg class="bi" width="22" height="22" fill="currentColor">
+            <use xlink:href="{{asset('img/bootstrap-icons.svg')}}#house-door-fill" />
+          </svg>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link {{ filter_input(INPUT_GET,'metal') == 1 ? 'active' : '' }}" href="{{route('catalog.index',['mgroup_id'=>$mgroup->id,'metal'=>1])}}">Золото</a></li>
+            <li class="nav-item"><a class="nav-link {{ filter_input(INPUT_GET,'metal') == 2 ? 'active' : '' }}" href="{{route('catalog.index',['mgroup_id'=>$mgroup->id,'metal'=>2])}}">Серебро</a></li>
           </ul>
         </div>
       </div>
-    </nav><!-- End: Navbar Right Links -->
-
+    </nav>
+    @endif
 
     <!-- Start: Product_elements -->
     <ul class="Product_elements pt-4 pb-5">
       @foreach($catalogs as $catalog)
-      <li class="Product_element"><a class="m-auto Product-block transition" href="/catalog/show/{{$catalog->id}}">
-          <div class="box-image" style="background-image:url(/media/<?=$catalog->img=='' ? 'no-image.png' : $catalog->img?>) ;"></div>
+      <li class="Product_element"><a class="m-auto Product-block transition" href="{{ route('catalog.show',[$catalog->id])}}">
+          <div class="box-image" style="background-image:url(<?= Storage::url('media/' . $catalog->img) ?>)"></div>
         </a>
-        <div class="spec" style="text-align: left;padding-left: 1rem;"><small style="margin-right: 1rem;">арт:</small><span>{{$catalog->articul}}</span></div>
+        <div class="spec" style="text-align: center;"><small style="margin-right: 1rem;">арт:</small><span>{{$catalog->articul}}</span></div>
       </li>
       @endforeach
     </ul><!-- End: Product_elements -->

@@ -1,3 +1,34 @@
+.create_edit_form label{
+  width: 240px;
+  padding-right: 8px;
+  text-align: right;
+}
+.bi{
+  vertical-align: text-top;
+}
+a >.bi{
+  color: #bc5300;
+}
+a > .b:hover{
+  opacity: 0.5;
+}
+
+.catalog.edit input, .catalog.edit select , .catalog.edit textarea{
+  width: 19rem;
+
+}
+
+.box-image {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  height: 120px;
+  width: 120px;
+  display: block;
+  background-color: white;
+}
+
 .primary_color {
   color: #8a4d0c;
 }
@@ -27,6 +58,7 @@
   padding: 0.5rem;
   border: 1px solid #ffb992;
   border-radius: 15px;
+  background-color: white;
 }
 
 a.transition {
@@ -71,4 +103,3 @@ a.transition {
 .nav-link.active {
   color: #bf741c !important;
 }
-
