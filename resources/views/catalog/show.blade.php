@@ -12,7 +12,9 @@ use Illuminate\Support\Carbon;
         <div class="row">
             <div class="col">
                 <div class="card m-auto" style="width: 20rem;display:flex; flex-direction:column; align-items:center;">
-                    <div class="box-image" style="background-image:url(<?= Storage::url('media/' . $element_catalog->img) ?>);width:200px;height:200px;"></div>
+                    
+                    <div class="box-image" style="background-image:url(<?= $element_catalog->img ? Storage::url('media/' . $element_catalog->img ) :'' ?>);width:200px;height:200px;"></div>
+                    
                     <div class="card-body" style=" align-items:left">
                         <h5 class="card-title font-monospace">{{ $element_catalog->articul }}</h5>
                         <p class="text-start m-0"> <span class="text-muted">наименование:</span> {{ $element_catalog->name }}</p>

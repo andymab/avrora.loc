@@ -7,7 +7,7 @@
 
     RewriteBase /
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^media/.*\.(svg|jpg|jpeg|png|gif|svg)$ /media/no-image.png [L]
+    RewriteRule ^media/.*\.(Array|svg|jpg|jpeg|png|gif)$ no-image.png [L]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .

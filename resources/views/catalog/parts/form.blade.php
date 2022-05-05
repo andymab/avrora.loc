@@ -1,6 +1,6 @@
 @csrf
 <div class="card m-auto" style="width: 30rem;display:flex; flex-direction:column; align-items:center">
-    @if(isset($element->img))
+    @if(isset($element->img) && $element->img)
     <div class="w-100 m-auto">
         <div class="box-image m-auto" style="background-image:url(<?= Storage::url('media/' . $element->img) ?>);width:200px;height:200px;"></div>
     </div>

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
-
+use Auth;;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -16,10 +16,12 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if ( \Auth::user() &&  \Auth::user()->is_admin == 1) {
+       if ( Auth::user() &&  Auth::user()->isAdmin()) {
             return $next($request);
-       }
+       } //прошли проверку идем дальше
 
        return redirect()->back()->with('success','У Вас нет прав администратора');
+       //abort(404);  // for other user throw 404 error
+   
     }
 }

@@ -32,7 +32,7 @@
 
 <body>
     @include('layouts.parts.navbarAvrora')
-    <header class="text-center p-4 p-md-5 mb-4 rounded" style="background:url('<?= asset('img/avr001.jpg') ?>')no-repeat center center;background-size:cover;">
+    <header class="text-center rounded" id="main_top_header" style="background:url('<?= asset('img/avr001.jpg') ?>')no-repeat center center;background-size:cover;">
         <div class="overlay"></div>
         <div class="container">
             <div class="row">
@@ -71,6 +71,7 @@
     </div>
     @yield('content')
     <script src="{{ asset('js/ext.js')}}"></script>
+    <script src="{{ asset('js/show_image_boxs.js')}}"></script>
     <!-- <script src="/assets/bootstrap/js/bootstrap.min.js?h=5488c86a1260428f0c13c0f8fb06bf6a"></script> -->
 </body>
 

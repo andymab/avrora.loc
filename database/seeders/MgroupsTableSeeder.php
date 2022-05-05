@@ -24,6 +24,8 @@ class MgroupsTableSeeder extends Seeder
         $array['created_at'] = date("Y-m-d H:i:s");
         $array['updated_at'] = date("Y-m-d H:i:s");
         unset($array['amt']);
+        unset($array['en_name']);
+        unset($array['mname']);
         return $array;
     }
 }

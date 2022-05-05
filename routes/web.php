@@ -19,9 +19,12 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', [MgroupController::class, 'index'])->name('index');
-
+//Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\MgroupController::class, 'index']);
+Route::resource('/mgroup','\App\Http\Controllers\MgroupController');
 Route::resource('/catalog','\App\Http\Controllers\CatalogController');
+
+
 
 Auth::routes();
 

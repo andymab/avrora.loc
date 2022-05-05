@@ -15,9 +15,8 @@ class CatalogController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except('index,show');
-        $this->middleware('admin')->only('destroy');
-    //  $this->middleware('auth');
+        $this->middleware('auth')->except('index','show');
+    //    $this->middleware('admin')->only('destroy');   
     }
 
     /**

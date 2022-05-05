@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class MgroupController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('admin')->except('index');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -47,7 +54,8 @@ class MgroupController extends Controller
      */
     public function show($id)
     {
-        //
+        $element = mgroups::find($id);
+        return view('mgroup.show', compact('element'));
     }
 
     /**
@@ -58,7 +66,8 @@ class MgroupController extends Controller
      */
     public function edit($id)
     {
-        //
+        $element = mgroups::find($id);
+        return view('mgroup.edit', compact('element'));
     }
 
     /**
@@ -70,7 +79,18 @@ class MgroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $element = mgroups::find($id);
+        $element->descr = $request->descr;
+        $element->name = $request->name;
+        
+        if ($file = $request->file('img')) {
+            $extension = $file->getClientOriginalExtension();
+            $store_name = $id . '.' . $extension;
+            \Storage::disk('public')->putFileAs('media/', $request->file('img'), $store_name);
+            $element->img = $store_name;
+        }
+        $element->update();
+        return redirect(route('mgroup.show', $element->id))->with('success', 'Изделие успешно обновленно');
     }
 
     /**
@@ -81,6 +101,8 @@ class MgroupController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $element = mgroups::find($id);
+        $element->delete();
+        return redirect(route('mgroup.index'))->with('success', 'Изделие успешно удалено');
     }
 }
