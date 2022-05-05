@@ -24,7 +24,7 @@
                                     {{$mgroup->name}}
                               </span>
                         </div>
-                        @if (auth()->user()->is_admin)
+                        @if (auth()->user() and auth()->user()->is_admin)
                          <a href="{{route('mgroup.show',[$mgroup->id])}}">Редактировать</a>   
                         @endif
                   </li>
